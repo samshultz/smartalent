@@ -12,6 +12,10 @@ from .models import OrganizationProfile, CandidateProfile, Job
 from .decorators import user_is_employer, employer_is_job_author
 
 
+def index(request):
+	return render(request, "account/index.html")
+
+	
 @login_required
 def dashboard(request):
 	return render(request, 'account/dashboard.html', {'section': 'dashboard'})

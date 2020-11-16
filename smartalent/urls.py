@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from courses.views import CourseListView
+from account.views import index
 
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('elearning/', include('courses.urls')),
     path('elearning/', CourseListView.as_view(), name='course_list'),
     path('students/', include('students.urls')),
+    path("", index, name="index"),
     # path('api/', include('account.api.urls', namespace='api')),
 ]
 

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+	Welcome to Smartalent
+{% endblock title %}
+
+{% block content %}
+	<section class="hero-wrapper hero-wrapper-3">
+    <div class="hero-overlay"></div><!-- end hero-overlay -->
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="hero-content-wrapper">
+                    <div class="hero-heading">
+                        <div class="section-heading">
+                            <h2 class="sec__title line-height-65">Explore Thousands of jobs Around You, Create a Free User Account</h2>
+                            
+                        </div>
+                    </div><!-- end hero-heading -->
+                    <div class="btn-box margin-top-35px">
+                        <a href="{% url 'register' %}" class="theme-btn mr-2">Find a Job</a>
+                        <a href="{% url 'register' %}" class="theme-btn bg-3">Post a Job</a>
+                    </div>
+                </div><!-- end hero-content-wrapper -->
+            </div><!-- end col-lg-7 -->
+           
+        </div><!-- end row -->
+    </div><!-- end container -->
+    <div class="hero-shape"></div>
+</section><!-- end hero-wrapper -->
+
+
+{% endblock content %}
