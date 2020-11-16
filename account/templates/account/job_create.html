@@ -1,0 +1,180 @@
+{% extends "account/dashboard_base.html" %}
+
+{% load static widget_tweaks %}
+
+{% block title %}
+	Post a Job
+{% endblock title %}
+
+{% block main-content %}
+	<div class="dashboard-content-wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+					{{ block.super }}
+                    <div class="breadcrumb-content d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="section-heading">
+                            <h2 class="sec__title">Post a Job</h2>
+                        </div><!-- end section-heading -->
+                        <ul class="list-items d-flex align-items-center">
+                            <li class="active__list-item"><a href="index.html">Home</a></li>
+                            <li class="active__list-item">Dashboard</li>
+                            <li>Post a Job</li>
+                        </ul>
+                    </div><!-- end breadcrumb-content -->
+                </div><!-- end col-lg-12 -->
+            </div><!-- end row -->
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <div class="billing-form-item">
+                        <div class="billing-title-wrap">
+                            <h3 class="widget-title pb-0">General Information</h3>
+                            <div class="title-shape margin-top-10px"></div>
+                        </div><!-- billing-title-wrap -->
+                        <div class="billing-content">
+                            <div class="contact-form-action">
+                                <form method="post" action=".">
+                                	{% csrf_token %}
+                                    <div class="row">
+                                       
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Job Title</label>
+                                                <div class="form-group">
+                                                    <span class="la la-briefcase form-icon"></span>
+                                                    {% render_field job_form.title|add_class:"form-control" placeholder="Enter job title" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Job Type</label>
+                                                <div class="form-group">
+                                                	{% render_field job_form.job_type|add_class:"job-type-option-field" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Offered Salary</label>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <span class="la la-dollar-sign form-icon"></span>
+                                                            {% render_field job_form.min_salary|add_class:"form-control" placeholder="Min" %}
+                                                            
+                                                        </div>
+                                                    </div><!-- end col-lg-6 -->
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <span class="la la-dollar-sign form-icon"></span>
+                                                            {% render_field job_form.max_salary|add_class:"form-control" placeholder="Max" %}
+                                                            
+                                                        </div>
+                                                    </div><!-- end col-lg-6 -->
+                                                </div><!-- end row -->
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Experience</label>
+                                                <div class="form-group">
+                                                	{% render_field job_form.experience|add_class:"experience-option-field" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Qualification</label>
+                                                <div class="form-group">
+                                                	{% render_field job_form.qualifications|add_class:"qualification-option-field" %}
+
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                         <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Gender</label>
+                                                <div class="form-group">
+                                                	{% render_field job_form.gender|add_class:"choose-gender-option-field" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Skill Requirements</label>
+                                                <div class="form-group">
+                                                	{% render_field job_form.required_skills|add_class:"skill-option-field" multiple="multiple" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        
+                                        <div class="col-lg-4 column-lg-full">
+                                            <div class="input-box">
+                                                <label class="label-text">Application Deadline Date</label>
+                                                <div class="form-group">
+                                                    <span class="la la-calendar form-icon"></span>
+                                                    {% render_field job_form.daterange|add_class:"date-range form-control" placeholder="2/25/2020" %}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-4 -->
+                                        <div class="col-lg-12">
+                                            <div class="input-box">
+                                                <label class="label-text">Job Description</label>
+                                                <div class="form-group mb-0">
+                                                    <span class="la la-pencil form-icon"></span>
+                                                    {% render_field job_form.description|add_class:"message-control form-control" placeholder="Write your job description" %}
+
+                                                </div>
+                                            </div>
+                                        </div><!-- end col-lg-12 -->
+                                    </div><!-- end row -->
+                                    <div class="btn-box mt-4">
+				                        <button type="submit" class="theme-btn border-0"><i class="la la-plus"></i> Submit Your Job</button>
+				                    </div><!-- end btn-box -->
+                                </form>
+                            </div><!-- end contact-form-action -->
+                        </div><!-- end billing-content -->
+                    </div><!-- end billing-form-item -->
+                    
+                </div><!-- end col-lg-12 -->
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div class="custom-checkbox mr-0">
+                            <div>
+                                <input type="checkbox" id="chb1">
+                                <label for="chb1">By Submitting Job You Confirm That You Accept The
+                                    <a href="" class="color-text">Terms & Conditions</a> And <a href="#" class="color-text">Privacy Policy</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div><!-- end col-lg-12 -->
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copy-right margin-top-30px padding-top-20px padding-bottom-20px">
+                        <p class="copy__desc">
+                            Copyright &copy;2020 Smartalent Inc.
+                        <ul class="list-items">
+                            <li><a href="#">Terms of Use,</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div><!-- end copy-right -->
+                </div><!-- end col-lg-12 -->
+            </div><!-- end row -->
+        </div><!-- end container-fluid -->
+    </div>
+{% endblock main-content %}

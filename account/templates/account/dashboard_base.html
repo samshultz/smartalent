@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+<section class="dashboard-area">
+	
+		<div class="dashboard-sidebar">
+        <div class="dashboard-nav-trigger">
+            <div class="dashboard-nav-trigger-btn">
+                <i class="la la-bars"></i> Dashboard Navigation
+            </div>
+        </div>
+        <div class="dashboard-nav-container">
+            <div class="humburger-menu">
+                <div class="humburger-menu-lines side-menu-close"></div><!-- end humburger-menu-lines -->
+            </div><!-- end humburger-menu -->
+            <div class="side-menu-wrap">
+                <ul class="side-menu-ul">
+                    <li class="page-active"><a href="{% url 'dashboard' %}"><i class="la la-dashboard icon-element"></i> Dashboard</a></li>
+                    
+                    <li>
+                        <a href="#"><i class="la la-bell-o icon-element"></i>jobs <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            {% if request.user.user_profile %}
+                                <li><a href="{% url 'applied_jobs' %}"> Applied Jobs</a></li>
+                                <li><a href="{% url 'job_alert' %}">Jobs Alerts</a></li>
+                            {% else %}
+                                <li><a href="{% url 'job_manage' %}">Manage Jobs</a></li>
+                            
+                                <li><a href="{% url 'job_create' %}">Post New Job</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="la la-cog icon-element"></i>Settings <span class="la la-caret-down btn-toggle"></span></a>
+                        <ul class="dropdown-menu-item">
+                            <li><a href="{% if request.user.user_profile %}{% url 'profile_edit' %}{% else %} {% url 'organization_profile_edit' %}{% endif %}">Edit Profile</a></li>
+                            <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                        </ul>
+                    </li>
+                    
+                    </li>
+                    <li><div class="section-block mt-3 mb-3"></div></li>
+                    
+                    <li><a href="{% url 'logout' %}"><i class="la la-power-off icon-element"></i> Logout</a></li>
+                   
+                </ul>
+            </div><!-- end side-menu-wrap -->
+        </div>
+    </div><!-- end dashboard-sidebar -->
+
+	{% block main-content %}
+		{% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-{% if messages.tags == error %}danger{% else %}{{ message.tags }}{% endif %}">
+                        {{ message|safe }}
+                        <a href="#" class="close">x</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+	{% endblock main-content %}
+
+</section>
+
+<!-- start back-to-top -->
+<div id="back-to-top">
+    <i class="fa fa-angle-up" title="Go top"></i>
+</div>
+<!-- end back-to-top -->
+
+<div class="modal-form text-center">
+    <div class="modal fade account-delete-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content p-4">
+                <div class="modal-top border-0 mb-4 p-0">
+                    <div class="alert-content">
+                        <span class="la la-exclamation-circle warning-icon"></span>
+                        <h4 class="modal-title mt-2 mb-1">Your account will be deleted permanently!</h4>
+                        <p class="modal-sub">Are you sure to proceed.</p>
+                    </div>
+                </div>
+                <div class="btn-box">
+                    <button type="button" class="theme-btn border-0" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="theme-btn border-0 button-danger">Delete!</button>
+                </div>
+            </div><!-- end modal-content -->
+        </div><!-- end modal-dialog -->
+    </div><!-- end modal -->
+</div><!-- end modal-form -->
+
+{% endblock content %}

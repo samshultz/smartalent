@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Logged out{% endblock %}
+
+{% block breadcrumb %}
+	
+{% endblock breadcrumb %}
+{% block content %}
+<section class="form-shared padding-top-100px padding-bottom-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="billing-form-item mb-0">
+                    <div class="billing-title-wrap">
+                        <h3 class="widget-title font-size-28">Logged out</h3>
+                        <p class="font-size-15">You have been successfully logged out. You can <a href="{% url 'login' %}">log-in again</a>.
+                        </p>
+                    </div><!-- billing-title-wrap -->
+                    
+                </div><!-- end billing-form-item -->
+            </div><!-- end col-lg-6 -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>{% endblock %}

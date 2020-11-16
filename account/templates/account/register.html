@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+	Create An Account
+{% endblock title %}
+
+{% block breadcrumb %}
+	
+{% endblock breadcrumb %}
+
+{% block content %}
+	<section class="form-shared padding-top-100px padding-bottom-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="user-action-form">
+                    <div class="tab-shared tab-shared-3">
+                        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link theme-btn active" id="signup-tab" data-toggle="tab" href="#signup-nav" role="tab" aria-controls="signup-nav" aria-selected="false">
+                                    <i class="la la-user"></i> Candidate
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link theme-btn" id="login-tab" data-toggle="tab" href="#login-nav" role="tab" aria-controls="login-nav" aria-selected="true">
+                                    <i class="la la-sign-in"></i> Employer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="signup-nav" role="tabpanel" aria-labelledby="signup-tab">
+                            <div class="billing-form-item mb-0">
+                                <div class="billing-title-wrap border-bottom-0 text-center">
+                                    <h3 class="widget-title font-size-28 pb-2">Create Your Account!</h3>
+                                    <p>Create an account to get recommended jobs that matches
+                                        <br> your resume and apply to multiple jobs in seconds! <br>
+                                        <strong class="color-text-2 font-weight-medium">Already have an account? <a href="{% url 'login' %}" class="color-text">Sign In</a></strong>
+                                    </p>
+                                </div><!-- billing-title-wrap -->
+                                <div class="billing-content">
+                                    <div class="contact-form-action">
+                                        <form method="post" action="{% url 'register' %}">
+                                            {% csrf_token %}
+                                            {% render_field user_form.user_type value="candidate" %}
+                                            <div class="input-box">
+                                                <label class="label-text">First name</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.first_name|add_class:"form-control" placeholder="First name" %}
+                                                   
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Last name</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.last_name|add_class:"form-control" placeholder="Last name" %}
+                                                  
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Username</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.username|add_class:"form-control" placeholder="Username" %}
+                                                  
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Email</label>
+                                                <div class="form-group">
+                                                    <i class="la la-envelope-o form-icon"></i>
+                                                    {% render_field user_form.email|add_class:"form-control" placeholder="Enter email address" %}
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Password</label>
+                                                <div class="form-group">
+                                                    <i class="la la-lock form-icon"></i>
+                                                    {% render_field user_form.password|add_class:"form-control" placeholder="Password" %}
+                                                    
+                                                    <span class="mt-1">Must use 8-15 characters and one number or symbol.</span>
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Confirm Password</label>
+                                                <div class="form-group">
+                                                    <i class="la la-lock form-icon"></i>
+                                                    {% render_field user_form.password2|add_class:"form-control" placeholder="Confirm password" %}
+                                                </div>
+                                            </div><!-- input-box -->
+                                           
+                                            <div class="input-box">
+                                                <div class="form-group">
+                                                    <div class="custom-checkbox d-block mr-0">
+                                                        <input type="checkbox" id="chb3">
+                                                        <label for="chb3">I Agree to Smartalent's <a href="#" class="color-text">Privacy Policy</a></label>
+                                                    </div><!-- end custom-checkbox -->
+                                                    <div class="custom-checkbox d-block mr-0">
+                                                        <input type="checkbox" id="chb4">
+                                                        <label for="chb4">I Agree to Smartalent's <a href="#" class="color-text">Terms of Services</a></label>
+                                                    </div><!-- end custom-checkbox -->
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="btn-box margin-top-30px">
+                                                <button class="theme-btn border-0" type="submit">Create Account</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- end contact-form-action -->
+                                </div><!-- end billing-content -->
+                            </div><!-- end billing-form-item -->
+                        </div><!-- end tab-pane -->
+                        <div class="tab-pane fade" id="login-nav" role="tabpanel" aria-labelledby="login-tab">
+                            <div class="billing-form-item mb-0">
+                                <div class="billing-title-wrap border-bottom-0 text-center">
+                                    <div class="billing-title-wrap border-bottom-0 text-center">
+                                    <h3 class="widget-title font-size-28 pb-2">Create Your Account!</h3>
+                                    <p>Create an account to get the best talents in seconds! <br>
+                                        <strong class="color-text-2 font-weight-medium">Already have an account? <a href="{% url 'login' %}" class="color-text">Sign In</a></strong>
+                                    </p>
+                                </div><!-- billing-title-wrap -->
+                                </div><!-- billing-title-wrap -->
+                                <div class="billing-content">
+                                    <div class="contact-form-action">
+                                        <form method="post" action="{% url 'register' %}">
+                                            {% csrf_token %}
+                                            {% render_field user_form.user_type value="employer" %}
+                                            <div class="input-box">
+                                                <label class="label-text">First name</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.first_name|add_class:"form-control" placeholder="First name" %}
+                                                   
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Last name</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.last_name|add_class:"form-control" placeholder="Last name" %}
+                                                  
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Username</label>
+                                                <div class="form-group">
+                                                    <i class="la la-user form-icon"></i>
+                                                    {% render_field user_form.username|add_class:"form-control" placeholder="Username" %}
+                                                  
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Email</label>
+                                                <div class="form-group">
+                                                    <i class="la la-envelope-o form-icon"></i>
+                                                    {% render_field user_form.email|add_class:"form-control" placeholder="Enter email address" %}
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Password</label>
+                                                <div class="form-group">
+                                                    <i class="la la-lock form-icon"></i>
+                                                    {% render_field user_form.password|add_class:"form-control" placeholder="Password" %}
+                                                    
+                                                    <span class="mt-1">Must use 8-15 characters and one number or symbol.</span>
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <label class="label-text">Confirm Password</label>
+                                                <div class="form-group">
+                                                    <i class="la la-lock form-icon"></i>
+                                                    {% render_field user_form.password2|add_class:"form-control" placeholder="Confirm password" %}
+                                                </div>
+                                            </div><!-- input-box -->
+                                           <div class="input-box">
+                                                <label class="label-text">Organization's name</label>
+                                                <div class="form-group">
+                                                    <i class="la la-lock form-icon"></i>
+                                                    {% render_field user_form.organization_name|add_class:"form-control" placeholder="Organization Name" required="required" %}
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="input-box">
+                                                <div class="form-group">
+                                                    <div class="custom-checkbox d-block mr-0">
+                                                        <input type="checkbox" id="chb3">
+                                                        <label for="chb3">I Agree to Smartalent's <a href="#" class="color-text">Privacy Policy</a></label>
+                                                    </div><!-- end custom-checkbox -->
+                                                    <div class="custom-checkbox d-block mr-0">
+                                                        <input type="checkbox" id="chb4">
+                                                        <label for="chb4">I Agree to Smartalent's <a href="#" class="color-text">Terms of Services</a></label>
+                                                    </div><!-- end custom-checkbox -->
+                                                </div>
+                                            </div><!-- input-box -->
+                                            <div class="btn-box margin-top-30px">
+                                                <button class="theme-btn border-0" type="submit">Create Account</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- end contact-form-action -->
+                                </div><!-- end billing-content -->
+                            </div><!-- end billing-form-item -->
+                        </div><!-- end tab-pane -->
+                    </div><!-- end tab-content -->
+                </div>
+            </div><!-- end col-lg-6 -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end form-shared -->
+{% endblock content %}
