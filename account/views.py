@@ -18,7 +18,13 @@ def index(request):
 
 @login_required
 def dashboard(request):
-	print(request.META['HTTP_REFERER'])
+	referer = request.META['HTTP_REFERER'].split("/")
+	if "courses" in referer:
+		if request.user.groups.filter(name="Instructors").exists():
+			return redirect("manage_course_list")
+		else:
+			return redirect("course_list")
+
 	return render(request, 'account/dashboard.html', {'section': 'dashboard'})
 
 
