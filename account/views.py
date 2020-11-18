@@ -18,6 +18,7 @@ def index(request):
 
 @login_required
 def dashboard(request):
+	print(request.META['HTTP_REFERER'])
 	return render(request, 'account/dashboard.html', {'section': 'dashboard'})
 
 
