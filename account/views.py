@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
-from .forms import (UserRegistrationForm, 
-					LoginForm, UserEditForm, 
-					CandidateProfileEditForm, 
+from .forms import (UserRegistrationForm,
+					LoginForm, UserEditForm,
+					CandidateProfileEditForm,
 					OrganizationProfileEditForm,
 					JobCreationForm)
 from .models import OrganizationProfile, CandidateProfile, Job
@@ -15,7 +15,7 @@ from .decorators import user_is_employer, employer_is_job_author
 def index(request):
 	return render(request, "account/index.html")
 
-	
+
 @login_required
 def dashboard(request):
 	return render(request, 'account/dashboard.html', {'section': 'dashboard'})
@@ -29,20 +29,24 @@ def register(request):
 			# Create a new user object but avoid saving it yet
 			user_type = user_form.cleaned_data.get('user_type')
 			print(user_type)
-			
+
 			new_user = user_form.save(commit=False)
 			# Set the chosen password
 			new_user.set_password(user_form.cleaned_data['password'])
 			# Save the User object
 			new_user.save()
 			messages.success(request, 'Regiistration Successful, Login')
-		else:
-			messages.error(request, 'Correct the errors Below')
+
 			if user_type == "candidate":
 				CandidateProfile.objects.create(user=new_user)
 			else:
 				OrganizationProfile.objects.create(user=new_user)
 			return render(request, 'account/register_done.html', {'new_user': new_user})
+		else:
+		    messages.error(request,  'Correct the errors below')
+
+
+
 	else:
 		user_form = UserRegistrationForm()
 	return render(request, 'account/register.html', {'user_form': user_form, 'login_form': LoginForm()})
@@ -52,7 +56,7 @@ def register(request):
 def candidate_profile_edit(request):
 	if request.method == 'POST':
 		user_form = UserEditForm(instance=request.user, data=request.POST)
-		profile_form = CandidateProfileEditForm(instance=request.user.user_profile, 
+		profile_form = CandidateProfileEditForm(instance=request.user.user_profile,
 												data=request.POST, files=request.FILES)
 		if user_form.is_valid() and profile_form.is_valid():
 			user_form.save()
@@ -65,7 +69,7 @@ def candidate_profile_edit(request):
 	else:
 		user_form = UserEditForm(instance=request.user)
 		profile_form = CandidateProfileEditForm(instance=request.user.user_profile)
-	return render(request, 'account/profile.html', {'user_form': user_form, 
+	return render(request, 'account/profile.html', {'user_form': user_form,
 												'profile_form': profile_form})
 
 
@@ -74,7 +78,7 @@ def organization_profile_edit(request):
 	if request.method == "POST":
 		user_form = UserEditForm(instance=request.user, data=request.POST)
 		profile_form = OrganizationProfileEditForm(instance=request.user.profile,
-													data=request.POST, 
+													data=request.POST,
 													files=request.FILES
 													)
 		if user_form.is_valid() and profile_form.is_valid():
@@ -89,7 +93,7 @@ def organization_profile_edit(request):
 		user_form = UserEditForm(instance=request.user)
 		profile_form = OrganizationProfileEditForm(instance=request.user.profile)
 
-	return render(request, 'account/employer_profile.html', {'user_form': user_form, 
+	return render(request, 'account/employer_profile.html', {'user_form': user_form,
 												'profile_form': profile_form})
 
 
