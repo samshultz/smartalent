@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -24,8 +24,8 @@ from account.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/courses/login/', auth_views.LoginView.as_view(), name='course_login'),
-    path('accounts/courses/logout/', auth_views.LogoutView.as_view(), name='course_logout'),
+    path('accounts/courses/login/', auth_views.LoginView.as_view(template_name='courses/registration/login.html', success_url="/elearning/courses"), name='course_login'),
+    path('accounts/courses/logout/', auth_views.LogoutView.as_view(template_name='courses/registration/logged_out.html'), name='course_logout'),
     path('account/', include("account.urls")),
     path('elearning/', include('courses.urls')),
     path('elearning/', CourseListView.as_view(), name='course_list'),
